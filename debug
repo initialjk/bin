@@ -1,0 +1,10 @@
+#!/usr/bin/ruby
+
+parsed = 'mvn test -Dmaven.surefire.debug'
+ARGV.each do |a|
+	  parsed += ' -Dtest='
+	  parsed += a.gsub(/[.]/, '#')
+end
+
+puts "Run: " + parsed
+exec parsed

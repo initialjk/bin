@@ -1,0 +1,11 @@
+#!/usr/bin/ruby
+
+if ARGV.any? { |s| s == 'clean' }
+   puts 'Clean first'
+   clean_result = %x( mvn clean install -DskipTests=true )
+   puts 'Results:'
+   puts clean_result
+end
+
+puts 'Run test'
+exec "mvn test -pl service"

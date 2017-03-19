@@ -1,0 +1,18 @@
+#!/usr/bin/ruby
+
+['com','net'].to_a.each do |suffix|
+('a'..'z').to_a.each do |first|
+('a'..'z').to_a.each do |second|
+#registrant = `whois #{first}#{second}.#{suffix} | sed -n 's/.*Registrant Name: //p'` 
+expired = `whois #{first}#{second}.#{suffix} | sed -n 's/.*Expiration Date: //p'`
+if expired.nil? || expired.empty?
+   expired = "Expired already!!"
+else
+   expired = expired.lines.first
+end
+puts "#{first}#{second}.#{suffix}\t#{expired}"
+#available = `whois #{first}#{second}.#{suffix} | sed -n 's/.*No match for //p'`
+#puts available if !available.nil? && !available.empty?
+end
+end
+end
